@@ -1,2 +1,2 @@
 # Url-shortener
-A url shortening website using nodej s and express js 
+A url shortening website backend using node.js , express js and mongoDB
