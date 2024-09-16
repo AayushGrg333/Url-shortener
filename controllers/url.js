@@ -19,7 +19,7 @@ async function generateNewShortUrl(req,res) {
         visitHistory: []
         });
 
-        return res.status(200).json({id: shortId,message: "Short URL created successfully"})
+        return res.render('home',{id: shortId})
 
     }catch(error){
         console.error("Error creating short URL", error);
