@@ -13,6 +13,16 @@ async function restrctToLoggedinUserOnly(req,res,next) {
     next();
 }
 
+async function checkAuth(req,res,next) {
+    const userUid = await req.cookies.uid;
+
+    const user = await getUser(userUid);//gets the data from the uid name,email,password
+
+    req.user = user;
+    next();
+}
+
 module.exports = {
     restrctToLoggedinUserOnly,
+    checkAuth
 }

@@ -5,7 +5,7 @@ const PORT = 8001;
 const connectMongoDB = require("./config/db");
 const URL = require("./models/url");
 const path = require('path');
-const {restrctToLoggedinUserOnly} = require('./middleware/auth')
+const {restrctToLoggedinUserOnly, checkAuth} = require('./middleware/auth')
 
 
 
@@ -28,7 +28,7 @@ app.use(express.urlencoded({extended:false}));
 app.use(cookieParser());
 
 //SSR
-app.use("/",staticRoute);//raw html
+app.use("/",checkAuth,staticRoute);//raw html
 app.use('/user',userRoute);//this is for login and signup
 
 
