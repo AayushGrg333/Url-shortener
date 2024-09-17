@@ -13,10 +13,13 @@ async function generateNewShortUrl(req,res) {
         if(!body.url) return res.status(400).json({eror: "URL is required"})
 
         const shortId = uid.rnd();
+
+        //create DB in mongo
         await URL.create({
         shortId: shortId,
         redirectURL: body.url,
-        visitHistory: []
+        visitHistory: [],
+        createdBy:req.user._id,
         });
 
         return res.render('home',{id: shortId})
