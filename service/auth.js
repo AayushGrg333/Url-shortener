@@ -1,12 +1,18 @@
-const sessionIdToUserMap = new Map()
+const jwt = require('jsonwebtoken');
+const secretkey = "verySecure"
 
-
-function setUser(id,user){
-    sessionIdToUserMap.set(id,user)
+function setUser(user){
+    const payload = {...user};
+    return jwt.sign(payload,secretkey);
 }
 
-function getUser(id){
-    return sessionIdToUserMap.get(id)
+function getUser(token){
+    if(!token) return null;
+    try{
+        return jwt.verify(token, secretkey); 
+    }catch(error){
+        return null;
+    }
 }
 
 module.exports = {
